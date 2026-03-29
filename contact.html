@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Harish Karthikeyan</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-block { display: flex; flex-direction: column; gap: 2rem; }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .contact-item:hover { border-color: rgba(110,231,196,0.25); }
+
+    .contact-item-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .contact-item-value {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .contact-item-value a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(232,230,223,0.15);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .contact-item-value a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .contact-item-sub {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    /* Profiles side */
+    .profiles-header {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-list { display: flex; flex-direction: column; gap: 0; }
+
+    .profile-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: padding-left 0.2s;
+    }
+
+    .profile-item:hover { padding-left: 0.5rem; }
+
+    .profile-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text);
+    }
+
+    .profile-arrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .profile-item:hover .profile-arrow { color: var(--accent); }
+
+    .collab-note {
+      margin-top: 3rem;
+      padding: 2rem;
+      border-left: 2px solid var(--accent);
+      background: rgba(110,231,196,0.04);
+    }
+
+    .collab-note p {
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: rgba(232,230,223,0.7);
+      line-height: 1.75;
+    }
+
+    @media (max-width: 800px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Harish Karthikeyan</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="personal.html">Personal</a></li>
+  </ul>
+</nav>
+
+<div class="page-header fade-up fade-up-1">
+  <p class="page-eyebrow">Get In Touch</p>
+  <h1>Contact</h1>
+</div>
+
+<div class="section fade-up fade-up-2">
+  <div class="contact-grid">
+
+    <div class="contact-block">
+      <div class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <span class="contact-item-value">
+          <a href="mailto:harish@nyu.edu">harish (at) nyu (dot) edu</a>
+        </span>
+        <span class="contact-item-sub">Academic &amp; Research inquiries</span>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Office</span>
+        <span class="contact-item-value">
+          383 Madison Avenue, Floor 9<br />
+          J.P. Morgan AI Research<br />
+          New York, NY 10017
+        </span>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Pronouns</span>
+        <span class="contact-item-value">He / Him / His</span>
+        <span class="contact-item-sub"><a href="https://www.mypronouns.org" target="_blank" style="color:var(--muted);border-bottom:1px solid transparent;">Why is this here? →</a></span>
+      </div>
+
+      <div class="collab-note">
+        <p>I am open to academic collaborations, speaking invitations, and discussions at the intersection of cryptography and ML privacy. Feel free to reach out.</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="profiles-header">Academic &amp; Professional Profiles</p>
+      <div class="profile-list">
+        <a href="https://scholar.google.com" target="_blank" class="profile-item">
+          <span class="profile-name">Google Scholar</span>
+          <span class="profile-arrow">↗</span>
+        </a>
+        <a href="https://dblp.org" target="_blank" class="profile-item">
+          <span class="profile-name">DBLP</span>
+          <span class="profile-arrow">↗</span>
+        </a>
+        <a href="https://eprint.iacr.org" target="_blank" class="profile-item">
+          <span class="profile-name">IACR ePrint</span>
+          <span class="profile-arrow">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/kharish" target="_blank" class="profile-item">
+          <span class="profile-name">LinkedIn</span>
+          <span class="profile-arrow">↗</span>
+        </a>
+        <a href="https://github.com" target="_blank" class="profile-item">
+          <span class="profile-name">GitHub</span>
+          <span class="profile-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p class="footer-text">&copy; 2026 Harish Karthikeyan</p>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="personal.html">Personal</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

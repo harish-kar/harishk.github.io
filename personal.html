@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal — Harish Karthikeyan</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── QUOTE BANNER ── */
+    .quote-banner {
+      background: var(--surface);
+      border-left: 2px solid var(--accent);
+      padding: 2rem 2.5rem;
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+
+    .quote-mark {
+      font-family: var(--serif);
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -0.5rem;
+    }
+
+    .quote-content {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: rgba(232,230,223,0.8);
+      line-height: 1.6;
+    }
+
+    .quote-source {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ── BIO TEXT ── */
+    .personal-bio {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: rgba(232,230,223,0.78);
+      line-height: 1.9;
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+    }
+
+    .personal-bio a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(110,231,196,0.3);
+      transition: border-color 0.2s;
+    }
+
+    .personal-bio a:hover { border-color: var(--accent); }
+
+    /* ── INTERESTS PILLS ── */
+    .interests-pile {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin: 2rem 0;
+    }
+
+    .interest-pill {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(232,230,223,0.65);
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      transition: all 0.15s;
+    }
+
+    .interest-pill:hover {
+      border-color: rgba(110,231,196,0.3);
+      color: var(--accent);
+    }
+
+    /* ── ADVOCACY ── */
+    .advocacy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 1rem 1.5rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+
+    .timeline-year {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .timeline-text {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(232,230,223,0.8);
+      line-height: 1.55;
+    }
+
+    .timeline-text strong { font-weight: 400; color: var(--text); }
+
+    /* ── TALKS ── */
+    .talks-list { display: flex; flex-direction: column; gap: 0; }
+
+    .talk-item {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .talk-title {
+      font-family: var(--serif);
+      font-size: 1.02rem;
+      font-weight: 300;
+      color: rgba(232,230,223,0.85);
+      line-height: 1.45;
+    }
+
+    .talk-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── WRITINGS ── */
+    .writing-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .writing-card:hover { border-color: rgba(110,231,196,0.3); }
+
+    .writing-card-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text);
+    }
+
+    .writing-card-meta {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .writing-card-arrow {
+      font-size: 1rem;
+      color: var(--muted);
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .writing-card:hover .writing-card-arrow { color: var(--accent); }
+
+    @media (max-width: 800px) {
+      .advocacy-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 120px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Harish Karthikeyan</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="personal.html" class="active">Personal</a></li>
+  </ul>
+</nav>
+
+<div class="page-header fade-up fade-up-1">
+  <p class="page-eyebrow">Beyond the Papers</p>
+  <h1>Personal</h1>
+</div>
+
+<div class="section fade-up fade-up-2">
+
+  <div class="quote-banner">
+    <span class="quote-mark">&ldquo;</span>
+    <div>
+      <p class="quote-content">Levity is the soul of this twit!</p>
+      <p class="quote-source">— New York Rimes &nbsp;·&nbsp; <em>(This page is an indulgence of nascent narcissism.)</em></p>
+    </div>
+  </div>
+
+  <p class="personal-bio">
+    Harish was born and raised in Chennai, India. He completed his undergraduate degree at the National Institute of Technology, Tiruchirappalli — one of the top technical institutions in India — before moving to New York to pursue his Master's at Columbia University, and later his Ph.D. at the Courant Institute of Mathematical Sciences, NYU.
+  </p>
+
+  <p class="personal-bio">
+    His academic interest in cryptography evolved alongside a deeper personal mission: to build spaces that are genuinely safe and secure — both computationally and humanly. He was inspired by his desire for a queer community at NIT Trichy, which led him to co-found virtual safe spaces including <strong>uNITTy</strong> and <strong>Qolk 2.0</strong>. His first Pride experience was with Chennai Pride in 2017. He has since volunteered as a Dispersal Lead for the NYC Pride March and served as Director of the Diversity, Accessibility &amp; Inclusion Committee of <a href="https://en.wikipedia.org/wiki/Heritage_of_Pride" target="_blank">Heritage of Pride (NYC Pride)</a>.
+  </p>
+
+  <p class="personal-bio">
+    He aims to create safe (and secure) spaces through both his cryptographic work and his advocacy — spaces that transcend the traditional definitions of accessibility, inclusivity, and diversity.
+  </p>
+
+  <!-- Interests / personality pills -->
+  <div class="interests-pile">
+    <span class="interest-pill">cryptic crosswords</span>
+    <span class="interest-pill">coffee</span>
+    <span class="interest-pill">cooking</span>
+    <span class="interest-pill">books</span>
+    <span class="interest-pill">beers</span>
+    <span class="interest-pill">British humour</span>
+    <span class="interest-pill">travel</span>
+    <span class="interest-pill">the Oxford Comma</span>
+    <span class="interest-pill">puns</span>
+    <span class="interest-pill">the metric system</span>
+    <span class="interest-pill">quizzing</span>
+    <span class="interest-pill">alliterations</span>
+    <span class="interest-pill">the number three</span>
+  </div>
+
+  <p class="personal-bio" style="font-style:italic; font-size:1rem; margin-top:0.5rem;">
+    He appreciates puns and the metric system, which makes him punny-wise but pound-foolish.<br />
+    <a href="https://www.youtube.com/watch?v=wHqqraFrrd0" target="_blank">If you laughed at that, get your tickets to his Netflix comedy special.</a>
+  </p>
+
+</div>
+
+<!-- ADVOCACY + TALKS -->
+<div class="section" style="border-top:1px solid var(--border);">
+  <p class="section-label">Service &amp; Advocacy</p>
+  <h2>Talks &amp; Volunteer Work</h2>
+
+  <div class="advocacy-grid">
+
+    <div>
+      <p style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;">Non-Research Talks</p>
+      <div class="talks-list">
+        <div class="talk-item">
+          <p class="talk-title">Panelist — Asian LGBT+ Movements Global Summit</p>
+          <p class="talk-meta">OutRight Action International · New York, NY · 2019</p>
+        </div>
+        <div class="talk-item">
+          <p class="talk-title">Panelist — Out and Abroad 3.0</p>
+          <p class="talk-meta">New York, NY · 2019</p>
+        </div>
+        <div class="talk-item">
+          <p class="talk-title">Panelist — LGBTQ+POC Global South Summit</p>
+          <p class="talk-meta">New York, NY · 2021</p>
+        </div>
+        <div class="talk-item">
+          <p class="talk-title">Panelist — Navigating Imposter Syndrome Workshop</p>
+          <p class="talk-meta">New York, NY · 2021</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.25rem;">Volunteer &amp; Leadership</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-year">2021 – 2022</span>
+          <span class="timeline-text"><strong>IDEAL Committee</strong>, Graduate School of Arts &amp; Sciences, NYU</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2020 – 2021</span>
+          <span class="timeline-text"><strong>D&amp;I Committee</strong>, Jitheshraj Fellowship for Promising Freshmen</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2019 – 2021</span>
+          <span class="timeline-text"><strong>Member</strong>, Heritage of Pride / NYC Pride</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2019 – 2020</span>
+          <span class="timeline-text"><strong>Director</strong>, Diversity, Accessibility &amp; Inclusion Committee, NYC Pride</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2019 – 2020</span>
+          <span class="timeline-text"><strong>Executive Board Member</strong>, NYC Pride</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2019 – 2021</span>
+          <span class="timeline-text"><strong>Lead / Assistant Captain</strong>, NYC Pride March</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WRITINGS -->
+<div class="section" style="border-top:1px solid var(--border);">
+  <p class="section-label">Writing</p>
+  <h2>Essays &amp; Articles</h2>
+
+  <a href="https://medium.com/@harishkarthikeyan/and-then-there-was-nine-fe346467dbe8" target="_blank" class="writing-card">
+    <div>
+      <p class="writing-card-title">And Then There Was Nine</p>
+      <p class="writing-card-meta">Medium &nbsp;·&nbsp; Personal essay</p>
+    </div>
+    <span class="writing-card-arrow">↗</span>
+  </a>
+
+</div>
+
+<footer>
+  <p class="footer-text">&copy; 2026 Harish Karthikeyan</p>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

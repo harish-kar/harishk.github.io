@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications — Harish Karthikeyan</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover { border-color: var(--text); color: var(--text); }
+    .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(110,231,196,0.06); }
+
+    /* ── YEAR GROUP ── */
+    .year-group { margin-bottom: 0; }
+
+    .year-heading {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      padding: 1.25rem 0 0.75rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    .year-heading::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: var(--border);
+    }
+
+    /* ── PUB CARD ── */
+    .pub-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem 2rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background 0.15s;
+    }
+
+    .pub-card:hover { background: rgba(255,255,255,0.015); }
+
+    .pub-main { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .pub-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(232,230,223,0.15);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .pub-title a:hover { color: var(--accent); border-color: var(--accent); }
+
+    .pub-authors {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .pub-authors strong {
+      color: rgba(232,230,223,0.7);
+      font-weight: 400;
+    }
+
+    .pub-sub {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .pub-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 0.35rem;
+      align-items: flex-start;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 1px;
+    }
+
+    .tag-venue {
+      background: rgba(110,231,196,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(110,231,196,0.2);
+    }
+
+    .tag-submission {
+      background: rgba(167,139,250,0.1);
+      color: var(--accent2);
+      border: 1px solid rgba(167,139,250,0.2);
+    }
+
+    .tag-workshop {
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .tag-crypto { background: rgba(110,231,196,0.08); color: #6ee7c4; border: 1px solid rgba(110,231,196,0.15); }
+    .tag-ml     { background: rgba(167,139,250,0.08); color: #a78bfa; border: 1px solid rgba(167,139,250,0.15); }
+    .tag-theory { background: rgba(251,191,36,0.08);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.15); }
+
+    .pub-links {
+      display: flex; flex-direction: column; gap: 0.4rem;
+      align-items: flex-end;
+      padding-top: 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .pub-link {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 1px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .pub-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SUMMARY STRIP ── */
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 3.5rem;
+    }
+
+    .summary-cell {
+      background: var(--surface);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+    }
+
+    .summary-num {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .summary-label {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 700px) {
+      .pub-card { grid-template-columns: 1fr; }
+      .pub-links { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+      .summary-strip { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Harish Karthikeyan</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="publications.html" class="active">Publications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="personal.html">Personal</a></li>
+  </ul>
+</nav>
+
+<div class="page-header fade-up fade-up-1">
+  <p class="page-eyebrow">Research Output</p>
+  <h1>Publications</h1>
+</div>
+
+<div class="section fade-up fade-up-2">
+  <!-- Summary strip -->
+  <div class="summary-strip">
+    <div class="summary-cell">
+      <span class="summary-num">15+</span>
+      <span class="summary-label">Total Papers</span>
+    </div>
+    <div class="summary-cell">
+      <span class="summary-num">5</span>
+      <span class="summary-label">Top Venues</span>
+    </div>
+    <div class="summary-cell">
+      <span class="summary-num">2</span>
+      <span class="summary-label">Under Submission</span>
+    </div>
+    <div class="summary-cell">
+      <span class="summary-num">2026</span>
+      <span class="summary-label">Most Recent</span>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterPubs('all', this)">All</button>
+    <button class="filter-btn" onclick="filterPubs('crypto', this)">Cryptography</button>
+    <button class="filter-btn" onclick="filterPubs('ml', this)">ML / Federated</button>
+    <button class="filter-btn" onclick="filterPubs('theory', this)">Theory</button>
+    <button class="filter-btn" onclick="filterPubs('submission', this)">Under Submission</button>
+  </div>
+
+  <!-- 2026 -->
+  <div class="year-group">
+    <div class="year-heading">2026</div>
+
+    <div class="pub-card" data-tags="crypto submission">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://drive.google.com/file/d/1kbQUXeTX6BKjrDfkCU-Gvk50r7NuTwsN/view?usp=sharing" target="_blank">TAPAS: Efficient Two-Server Asymmetric Private Aggregation Beyond Prio(+)</a></p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong> and Antigoni Polychroniadou</p>
+        <div class="pub-tags">
+          <span class="tag tag-submission">Under Submission</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://drive.google.com/file/d/1kbQUXeTX6BKjrDfkCU-Gvk50r7NuTwsN/view?usp=sharing" target="_blank" class="pub-link">PDF</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-tags="crypto">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://ifca.ai/fc26/preproceedings/258.pdf" target="_blank">Updatable Public-Key Encryption from Class Groups: New Constructions with Better Efficiency</a></p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong> and Antigoni Polychroniadou</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">Financial Cryptography 2026</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://ifca.ai/fc26/preproceedings/258.pdf" target="_blank" class="pub-link">PDF</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-tags="ml submission">
+      <div class="pub-main">
+        <p class="pub-title">HashMark: Watermarking Tabular (Synthetic) Data For Machine Learning Via Cryptographic Hash Functions</p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong> et al.</p>
+        <p class="pub-sub">Also: NeurIPS 2025 Workshop on GenAI in Finance</p>
+        <div class="pub-tags">
+          <span class="tag tag-submission">Under Submission — ICML &rsquo;26</span>
+          <span class="tag tag-ml">ML</span>
+          <span class="tag tag-workshop">NeurIPS &rsquo;25 Workshop</span>
+        </div>
+      </div>
+      <div class="pub-links"></div>
+    </div>
+
+    <div class="pub-card" data-tags="ml submission crypto">
+      <div class="pub-main">
+        <p class="pub-title">AgentCrypt: Advancing Privacy and Secure Computation in AI Agent Collaboration</p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong> et al.</p>
+        <p class="pub-sub">Also: NeurIPS 2025 Workshop on Scaling Environments for Agents</p>
+        <div class="pub-tags">
+          <span class="tag tag-submission">Under Submission — ICML &rsquo;26</span>
+          <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-ml">ML / Agents</span>
+          <span class="tag tag-workshop">NeurIPS &rsquo;25 Workshop</span>
+        </div>
+      </div>
+      <div class="pub-links"></div>
+    </div>
+  </div>
+
+  <!-- 2025 -->
+  <div class="year-group">
+    <div class="year-heading">2025</div>
+
+    <div class="pub-card" data-tags="ml crypto">
+      <div class="pub-main">
+        <p class="pub-title">Armadillo: Robust Secure Aggregation for Federated Learning with Input Validation</p>
+        <p class="pub-authors">Yiping Ma, Yue Guo, <strong>Harish Karthikeyan</strong>, Antigoni Polychroniadou</p>
+        <p class="pub-sub">Early version: NeurIPS 2024 AIM-FM Workshop</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">ACM CCS 2025</span>
+          <span class="tag tag-ml">Federated Learning</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links"></div>
+    </div>
+
+    <div class="pub-card" data-tags="ml crypto">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://eprint.iacr.org/2024/723" target="_blank">OPA: One-shot Private Aggregation with Single Client Interaction and its Applications to Federated Learning</a></p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong> and Antigoni Polychroniadou</p>
+        <p class="pub-sub">Early versions: TPMPC &rsquo;25 · NeurIPS &rsquo;24 Workshop · AAAI &rsquo;25 Workshop</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">CRYPTO 2025</span>
+          <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-ml">Federated Learning</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://eprint.iacr.org/2024/723" target="_blank" class="pub-link">ePrint</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="year-group">
+    <div class="year-heading">2024</div>
+
+    <div class="pub-card" data-tags="crypto">
+      <div class="pub-main">
+        <p class="pub-title">PriDeCT: Towards Public Consensus, Private Transactions, and Forward Secrecy in Decentralized Payments</p>
+        <p class="pub-authors">Yue Guo, <strong>Harish Karthikeyan</strong>, Antigoni Polychroniadou</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">IEEE S&amp;P 2024</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links"></div>
+    </div>
+  </div>
+
+  <!-- 2023 -->
+  <div class="year-group">
+    <div class="year-heading">2023</div>
+
+    <div class="pub-card" data-tags="crypto theory">
+      <div class="pub-main">
+        <p class="pub-title">Combining Forward-Security and Leakage-Resilience, Revisited</p>
+        <p class="pub-authors">Suvradip Chakraborty, <strong>Harish Karthikeyan</strong>, Adam O'Neill, C. Pandu Rangan</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">CANS 2023</span>
+          <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-theory">Theory</span>
+        </div>
+      </div>
+      <div class="pub-links"></div>
+    </div>
+  </div>
+
+  <!-- 2022 -->
+  <div class="year-group">
+    <div class="year-heading">2022</div>
+
+    <div class="pub-card" data-tags="crypto theory">
+      <div class="pub-main">
+        <p class="pub-title">Forward-Secure Encryption with Fast Forwarding</p>
+        <p class="pub-authors">Yevgeniy Dodis, Daniel Jost, and <strong>Harish Karthikeyan</strong></p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">TCC 2022</span>
+          <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-theory">Theory</span>
+        </div>
+      </div>
+      <div class="pub-links"></div>
+    </div>
+
+    <div class="pub-card" data-tags="theory crypto">
+      <div class="pub-main">
+        <p class="pub-title">On Seedless PRNGs and Premature Next</p>
+        <p class="pub-authors">Sandro Coretti, Yevgeniy Dodis, <strong>Harish Karthikeyan</strong>, Noah Stephens-Davidowitz, Stefano Tessaro</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">ITC 2022</span>
+          <span class="tag tag-theory">Theory</span>
+        </div>
+      </div>
+      <div class="pub-links"></div>
+    </div>
+
+    <div class="pub-card" data-tags="crypto">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://cs.nyu.edu/~dodis/ps/esi.pdf" target="_blank">Encapsulated Search Index: Public-Key, Sub-linear, Distributed, and Delegatable</a></p>
+        <p class="pub-authors">Erik Aronesty, David Cash, Yevgeniy Dodis, Daniel H. Gallancy, Christopher Highley, <strong>Harish Karthikeyan</strong>, Oren Tysor</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">PKC 2022</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://cs.nyu.edu/~dodis/ps/esi.pdf" target="_blank" class="pub-link">PDF</a>
+      </div>
+    </div>
+
+    <div class="pub-card" data-tags="crypto theory">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://cs.nyu.edu/~dodis/ps/smallbox.pdf" target="_blank">Small-Box Cryptography</a></p>
+        <p class="pub-authors">Yevgeniy Dodis, <strong>Harish Karthikeyan</strong>, and Daniel Wichs</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">ITCS 2022</span>
+          <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-theory">Theory</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://cs.nyu.edu/~dodis/ps/smallbox.pdf" target="_blank" class="pub-link">PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2021 -->
+  <div class="year-group">
+    <div class="year-heading">2021</div>
+
+    <div class="pub-card" data-tags="crypto theory">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://cs.nyu.edu/~dodis/ps/upke.pdf" target="_blank">Updatable Public Key Encryption in the Standard Model</a></p>
+        <p class="pub-authors">Yevgeniy Dodis, <strong>Harish Karthikeyan</strong>, and Daniel Wichs</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">TCC 2021</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://cs.nyu.edu/~dodis/ps/upke.pdf" target="_blank" class="pub-link">PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2019 -->
+  <div class="year-group">
+    <div class="year-heading">2019</div>
+
+    <div class="pub-card" data-tags="theory crypto">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://eprint.iacr.org/2019/198.pdf" target="_blank">Seedless Fruit is the Sweetest: Random Number Generation, Revisited</a></p>
+        <p class="pub-authors">Sandro Coretti, Yevgeniy Dodis, <strong>Harish Karthikeyan</strong>, Stefano Tessaro</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">CRYPTO 2019</span>
+          <span class="tag tag-theory">Theory</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://eprint.iacr.org/2019/198.pdf" target="_blank" class="pub-link">PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2015 -->
+  <div class="year-group">
+    <div class="year-heading">2015</div>
+
+    <div class="pub-card" data-tags="crypto">
+      <div class="pub-main">
+        <p class="pub-title"><a href="https://eprint.iacr.org/2015/1012.pdf" target="_blank">An Efficient Multiple PKG Compatible Identity Based Authenticated Key Agreement Protocol</a></p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong>, Suvradip Chakraborty, Kunwar Singh, C. Pandu Rangan</p>
+        <p class="pub-sub">Accepted at Inscrypt 2015</p>
+        <div class="pub-tags">
+          <span class="tag tag-venue">Inscrypt 2015</span>
+          <span class="tag tag-crypto">Cryptography</span>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://eprint.iacr.org/2015/1012.pdf" target="_blank" class="pub-link">ePrint</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end section -->
+
+<footer>
+  <p class="footer-text">&copy; 2026 Harish Karthikeyan</p>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="personal.html">Personal</a></li>
+  </ul>
+</footer>
+
+<script>
+  function filterPubs(tag, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.pub-card').forEach(card => {
+      if (tag === 'all') {
+        card.style.display = '';
+      } else {
+        const tags = (card.dataset.tags || '').split(' ');
+        card.style.display = tags.includes(tag) ? '' : 'none';
+      }
+    });
+
+    // Hide year headings with no visible children
+    document.querySelectorAll('.year-group').forEach(group => {
+      const visible = [...group.querySelectorAll('.pub-card')].some(c => c.style.display !== 'none');
+      group.style.display = visible ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
