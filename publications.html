@@ -221,7 +221,7 @@
 
 <div class="section fade-up fade-up-2">
   <!-- Summary strip -->
-  <div class="summary-strip">
+  <!-- <div class="summary-strip">
     <div class="summary-cell">
       <span class="summary-num">15+</span>
       <span class="summary-label">Total Papers</span>
@@ -238,27 +238,59 @@
       <span class="summary-num">2026</span>
       <span class="summary-label">Most Recent</span>
     </div>
-  </div>
+  </div> -->
 
   <!-- Filter -->
   <div class="filter-bar">
     <button class="filter-btn active" onclick="filterPubs('all', this)">All</button>
     <button class="filter-btn" onclick="filterPubs('crypto', this)">Cryptography</button>
+    <button class="filter-btn" onclick="filterPubs('preprint', this)">Preprints</button>
     <button class="filter-btn" onclick="filterPubs('ml', this)">ML / Federated</button>
     <button class="filter-btn" onclick="filterPubs('theory', this)">Theory</button>
+    <button class="filter-btn" onclick="filterPubs('sec', this)">Security</button>
     <button class="filter-btn" onclick="filterPubs('submission', this)">Under Submission</button>
   </div>
 
   <!-- 2026 -->
   <div class="year-group">
     <div class="year-heading">2026</div>
+    <div class="pub-card" data-tags="crypto submission security">
+      <div class="pub-main">
+        <p class="pub-title">CRSP-FL: Efficiently Scaling Private Frequency Estimation to Resolve Data Heterogeneity in Federated Learning</p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong></p>
+        <div class="pub-tags">
+          <span class="tag tag-submission">Under Submission</span>
+          <span class="tag tag-preprint">Preprint</span>
+          <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-sec">Security</span>
+        </div>
+      </div>
+      <div class="pub-links">
+      </div>
+    </div>
 
-    <div class="pub-card" data-tags="crypto submission">
+        <div class="pub-card" data-tags="crypto submission security">
+      <div class="pub-main">
+        <p class="pub-title">OPA Sketched: Breaking the Secure Aggregation Tax for Communication Efficient Private Federated Learning</p>
+        <p class="pub-authors"><strong>Harish Karthikeyan</strong></p>
+        <div class="pub-tags">
+          <span class="tag tag-submission">Under Submission</span>
+          <span class="tag tag-preprint">Preprint</span>
+          <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-sec">Security</span>
+        </div>
+      </div>
+      <div class="pub-links">
+      </div>
+    </div>
+    
+    <div class="pub-card" data-tags="crypto submission preprint">
       <div class="pub-main">
         <p class="pub-title"><a href="https://eprint.iacr.org/2026/564" target="_blank">TAPAS: Efficient Two-Server Asymmetric Private Aggregation Beyond Prio(+)</a></p>
         <p class="pub-authors"><strong>Harish Karthikeyan</strong> and Antigoni Polychroniadou</p>
         <div class="pub-tags">
           <span class="tag tag-submission">Under Submission</span>
+          <span class="tag tag-preprint">Preprint</span>
           <span class="tag tag-crypto">Cryptography</span>
         </div>
       </div>
@@ -267,21 +299,23 @@
       </div>
     </div>
 
-    <div class="pub-card" data-tags="ml submission">
+
+    <div class="pub-card" data-tags="ml submission preprint">
       <div class="pub-main">
-        <p class="pub-title">HashMark: Watermarking Tabular (Synthetic) Data For Machine Learning Via Cryptographic Hash Functions</p>
+        <p class="pub-title"><a href="https://openreview.net/pdf?id=jr4HnCrEaP" target="_blank">HashMark: Watermarking Tabular (Synthetic) Data For Machine Learning Via Cryptographic Hash Functions</a></p>
         <p class="pub-authors"><strong>Harish Karthikeyan</strong>, Leo de Castro, Antigoni Polychroniadou, Manuela Veloso, Tucker Balch</p>
         <p class="pub-sub">Regulatable ML @NeurIPS2025, NeurIPS 2025 Workshop on GenAI in Finance</p>
         <div class="pub-tags">
           <span class="tag tag-submission">Under Submission — ICML &rsquo;26</span>
           <span class="tag tag-ml">ML</span>
+          <span class="tag tag-preprint">Preprint</span>
           <span class="tag tag-workshop">NeurIPS &rsquo;25 Workshop</span>
         </div>
       </div>
       <div class="pub-links"></div>
     </div>
 
-    <div class="pub-card" data-tags="ml submission crypto">
+    <div class="pub-card" data-tags="ml submission crypto preprint">
       <div class="pub-main">
         <p class="pub-title"><a href="https://eprint.iacr.org/2025/2216.pdf" target="_blank">AgentCrypt: Advancing Privacy and Secure Computation in AI Agent Collaboration</a></p>
         <p class="pub-authors"><strong>Harish Karthikeyan</strong>, Yue Guo, Leo de Castro, Antigoni Polychroniadou, Leo Ardon, Udari Madhushani Sehwag, Sumitra Ganesh, Manuela Veloso</p>
@@ -290,6 +324,7 @@
           <span class="tag tag-submission">Under Submission — ICML &rsquo;26</span>
           <span class="tag tag-crypto">Cryptography</span>
           <span class="tag tag-ml">ML / Agents</span>
+          <span class="tag tag-preprint">Preprint</span>
           <span class="tag tag-workshop">NeurIPS &rsquo;25 Workshop</span>
         </div>
       </div>
@@ -314,7 +349,7 @@
   <div class="year-group">
     <div class="year-heading">2025</div>
 
-    <div class="pub-card" data-tags="ml crypto">
+    <div class="pub-card" data-tags="ml crypto sec">
       <div class="pub-main">
         <p class="pub-title">Armadillo: Robust Secure Aggregation for Federated Learning with Input Validation</p>
         <p class="pub-authors">Yiping Ma, Yue Guo, <strong>Harish Karthikeyan</strong>, Antigoni Polychroniadou</p>
@@ -322,6 +357,7 @@
         <div class="pub-tags">
           <span class="tag tag-venue">ACM CCS 2025</span>
           <span class="tag tag-ml">Federated Learning</span>
+          <span class="tag tag-sec">Security</span>
           <span class="tag tag-crypto">Cryptography</span>
         </div>
       </div>
@@ -349,13 +385,14 @@
   <div class="year-group">
     <div class="year-heading">2024</div>
 
-    <div class="pub-card" data-tags="crypto">
+    <div class="pub-card" data-tags="crypto sec">
       <div class="pub-main">
         <p class="pub-title">PriDeCT: Towards Public Consensus, Private Transactions, and Forward Secrecy in Decentralized Payments</p>
         <p class="pub-authors">Yue Guo, <strong>Harish Karthikeyan</strong>, Antigoni Polychroniadou</p>
         <div class="pub-tags">
           <span class="tag tag-venue">IEEE S&amp;P 2024</span>
           <span class="tag tag-crypto">Cryptography</span>
+          <span class="tag tag-sec">Security</span>
         </div>
       </div>
       <div class="pub-links"></div>
